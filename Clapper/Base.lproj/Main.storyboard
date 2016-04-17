@@ -21,10 +21,17 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5XH-lT-VM2">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LLH-mQ-V1S" secondAttribute="bottom" id="BMz-Qj-hDx"/>
+                            <constraint firstItem="5XH-lT-VM2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Jnp-4k-39n"/>
+                            <constraint firstAttribute="trailing" secondItem="5XH-lT-VM2" secondAttribute="trailing" id="Qi1-61-0QI"/>
+                            <constraint firstItem="5XH-lT-VM2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aB5-mL-ng3"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5XH-lT-VM2" secondAttribute="bottom" id="dkZ-Zq-dBL"/>
                             <constraint firstItem="LLH-mQ-V1S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gXj-lG-ioB"/>
                             <constraint firstItem="LLH-mQ-V1S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iYA-iK-ECE"/>
                             <constraint firstAttribute="trailing" secondItem="LLH-mQ-V1S" secondAttribute="trailing" id="x1b-BG-oed"/>
@@ -32,6 +39,7 @@
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="LLH-mQ-V1S" id="c7w-21-aQH"/>
+                        <outlet property="finishedView" destination="5XH-lT-VM2" id="EFb-r7-cOe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

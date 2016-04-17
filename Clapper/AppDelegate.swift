@@ -14,8 +14,9 @@ let ClapperClapNotification = "ClapperClapNotification"
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var server: Server!
     var window: UIWindow?
+    
+    var server: Server!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         server = Taylor.Server()
@@ -29,12 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        let port = 12345
-        do {
-            print("Starting server on port \(port)")
-            try server.serveHTTP(port: port, forever: true)
-        } catch {
-            print("Server start failed \(error)")
+        dispatch_async(dispatch_queue_create("serverQueue", DISPATCH_QUEUE_SERIAL)) {
+            let port = 12345
+            do {
+                print("Starting server on port \(port)")
+                try self.server.serveHTTP(port: port, forever: true)
+            } catch {
+                print("Server start failed \(error)")
+            }
         }
         
         return true

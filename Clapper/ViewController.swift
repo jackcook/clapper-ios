@@ -12,6 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var finishedView: UIImageView!
     
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
@@ -24,11 +25,13 @@ class ViewController: UIViewController {
         
         initializeCamera()
         
+        finishedView.alpha = 0
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clap), name: ClapperClapNotification, object: nil)
     }
     
     func initializeCamera() {
-        let session = AVCaptureSession()
+        captureSession = AVCaptureSession()
         
         let camera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         let cameraInput = try! AVCaptureDeviceInput(device: camera)
@@ -63,21 +66,38 @@ class ViewController: UIViewController {
             print("error locking camera for configuration")
         }
         
-        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
+        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         cameraView.layer.addSublayer(previewLayer)
         previewLayer.frame = UIScreen.mainScreen().bounds
         
-        session.addInput(cameraInput)
-        session.startRunning()
+        stillImageOutput = AVCaptureStillImageOutput()
+        stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
+        captureSession.addOutput(stillImageOutput)
+        
+        captureSession.addInput(cameraInput)
+        captureSession.startRunning()
     }
     
     func clap() {
-        dispatch_async(dispatch_get_main_queue()) { 
-            self.view.backgroundColor = UIColor.redColor()
+        var videoConnection: AVCaptureConnection?
+        
+        connectionsLoop: for connection in stillImageOutput.connections {
+            for port in connection.inputPorts as! [AVCaptureInputPort] {
+                if port.mediaType == AVMediaTypeVideo {
+                    videoConnection = connection as? AVCaptureConnection
+                    break connectionsLoop
+                }
+            }
         }
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.25 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-            self.view.backgroundColor = UIColor.whiteColor()
-        }
+        stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (imageSampleBuffer, error) -> Void in
+            let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer)
+            self.imageTaken = UIImage(data: data)
+            self.finishedView.image = self.imageTaken
+            
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.finishedView.alpha = 1
+            })
+        })
     }
 }

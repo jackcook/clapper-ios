@@ -9,9 +9,10 @@
 import AVFoundation
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CameraButtonDelegate {
     
     @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var cameraButton: CameraButton!
     @IBOutlet weak var finishedView: UIImageView!
     
     private var captureSession: AVCaptureSession!
@@ -25,9 +26,12 @@ class ViewController: UIViewController {
         
         initializeCamera()
         
+        cameraButton.delegate = self
+        
         finishedView.alpha = 0
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clap(_:)), name: ClapperClapNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(lightingUpdated(_:)), name: ClapperLightNotification, object: nil)
     }
     
     func initializeCamera() {
@@ -89,7 +93,7 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
+         
         stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (imageSampleBuffer, error) -> Void in
             let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer)
             self.imageTaken = UIImage(data: data)
@@ -113,5 +117,21 @@ class ViewController: UIViewController {
                 self.takePicture()
             }
         }
+    }
+    
+    func lightingUpdated(notification: NSNotification) {
+        guard let n = notification.object as? Int else {
+            return
+        }
+        
+        print("\(n) light")
+    }
+    
+    func takePhoto(button: CameraButton) {
+        takePicture()
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 }

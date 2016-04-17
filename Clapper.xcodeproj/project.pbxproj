@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C7792CC30692031A3385C482 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336F18DF656EA5E01D09C390 /* Pods.framework */; };
+		EB2A36AF1CC382DA005EDA33 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2A36AE1CC382DA005EDA33 /* ColorConstants.swift */; };
+		EB4D941E1CC37FCA00CEE82D /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D941D1CC37FCA00CEE82D /* CameraButton.swift */; };
 		EBE327661CC31B5B00FD5EA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE327651CC31B5B00FD5EA9 /* AppDelegate.swift */; };
 		EBE327681CC31B5B00FD5EA9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE327671CC31B5B00FD5EA9 /* ViewController.swift */; };
 		EBE3276B1CC31B5B00FD5EA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBE327691CC31B5B00FD5EA9 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 		336F18DF656EA5E01D09C390 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74E9B731518C097B507E6461 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CE7E8558F6405DC454C3BD4C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EB2A36AE1CC382DA005EDA33 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		EB4D941D1CC37FCA00CEE82D /* CameraButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
 		EBE327621CC31B5B00FD5EA9 /* Clapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE327651CC31B5B00FD5EA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBE327671CC31B5B00FD5EA9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +84,8 @@
 			children = (
 				EBE327651CC31B5B00FD5EA9 /* AppDelegate.swift */,
 				EBE327671CC31B5B00FD5EA9 /* ViewController.swift */,
+				EB4D941D1CC37FCA00CEE82D /* CameraButton.swift */,
+				EB2A36AE1CC382DA005EDA33 /* ColorConstants.swift */,
 				EBE327691CC31B5B00FD5EA9 /* Main.storyboard */,
 				EBE3276C1CC31B5B00FD5EA9 /* Assets.xcassets */,
 				EBE3276E1CC31B5B00FD5EA9 /* LaunchScreen.storyboard */,
@@ -178,8 +184,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB4D941E1CC37FCA00CEE82D /* CameraButton.swift in Sources */,
 				EBE327681CC31B5B00FD5EA9 /* ViewController.swift in Sources */,
 				EBE327661CC31B5B00FD5EA9 /* AppDelegate.swift in Sources */,
+				EB2A36AF1CC382DA005EDA33 /* ColorConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

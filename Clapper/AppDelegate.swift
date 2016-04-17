@@ -10,6 +10,7 @@ import Taylor
 import UIKit
 
 let ClapperClapNotification = "ClapperClapNotification"
+let ClapperLightNotification = "ClapperLightNotification"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             NSNotificationCenter.defaultCenter().postNotificationName(ClapperClapNotification, object: ni)
+            
+            response.bodyString = "success"
+            callback(.Send(request, response))
+            
+            return
+        }
+        
+        server.get("/light") { (request, response, callback) in
+            guard let n = request.arguments["n"], ni = Int(n) else {
+                return
+            }
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(ClapperLightNotification, object: ni)
             
             response.bodyString = "success"
             callback(.Send(request, response))

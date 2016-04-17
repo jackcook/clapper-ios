@@ -154,16 +154,10 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
     }
     
     func clap(notification: NSNotification) {
-        guard let n = notification.object as? Int else {
-            return
-        }
+        print("clap")
         
-        print("\(n) claps")
-        
-        if n == 1 {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-                self.takePicture()
-            }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+            self.takePicture()
         }
     }
     

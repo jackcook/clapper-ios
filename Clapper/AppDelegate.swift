@@ -25,11 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         server = Taylor.Server()
         
         server.get("/clap") { (request, response, callback) in
-            guard let n = request.arguments["n"], ni = Int(n) else {
-                return
-            }
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(ClapperClapNotification, object: ni)
+            NSNotificationCenter.defaultCenter().postNotificationName(ClapperClapNotification, object: nil)
             
             response.bodyString = "success"
             callback(.Send(request, response))

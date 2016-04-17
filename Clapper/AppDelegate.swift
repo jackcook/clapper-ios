@@ -8,6 +8,8 @@
 
 import UIKit
 
+let ClapperClapNotification = "ClapperClapNotification"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

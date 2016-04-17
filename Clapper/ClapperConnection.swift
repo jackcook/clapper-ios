@@ -24,7 +24,8 @@ class ClapperConnection: HTTPConnection {
         }
         
         if method == "GET" && url.pathComponents![1] == "clap" {
-            print("clap")
+            NSNotificationCenter.defaultCenter().postNotificationName(ClapperClapNotification, object: nil)
+            
             let response = "success".dataUsingEncoding(NSUTF8StringEncoding)
             return HTTPDataResponse(data: response)
         }

@@ -36,6 +36,8 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clap(_:)), name: ClapperClapNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(lightingUpdated(_:)), name: ClapperLightNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(temperatureUpdated(_:)), name: ClapperTemperatureNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(flashUpdated(_:)), name: ClapperFlashNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -192,6 +194,28 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
             filterView.backgroundColor = UIColor(red: 51/255, green: 152/255, blue: 219/255, alpha: CGFloat(min(0.2, 4 / Float(n))))
         } else {
             filterView.backgroundColor = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: CGFloat(min(0.2, 0.4 - (20 / Float(n)))))
+        }
+    }
+    
+    func flashUpdated(notification: NSNotification) {
+        guard let n = notification.object as? Int else {
+            return
+        }
+        
+        do {
+            try camera.lockForConfiguration()
+            
+            if n <= 0 {
+                camera.torchMode = .Off
+            } else if n >= 1 {
+                camera.torchMode = .On
+            } else {
+                try camera.setTorchModeOnWithLevel(Float(n) / 350)
+            }
+            
+            camera.unlockForConfiguration()
+        } catch {
+            print("couldn't set flash")
         }
     }
     

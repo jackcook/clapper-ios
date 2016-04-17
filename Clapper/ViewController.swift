@@ -15,14 +15,13 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var cameraButton: CameraButton!
     @IBOutlet weak var photosButton: PhotosButton!
+    @IBOutlet weak var filterView: UIView!
     
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
     private var camera: AVCaptureDevice!
     private var stillImageOutput: AVCaptureStillImageOutput!
     private var imageTaken: UIImage!
-    
-    private var filterView: UIView!
     
     private var assets = [PHAsset]()
     
@@ -34,10 +33,6 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
         
         cameraButton.delegate = self
         photosButton.delegate = self
-        
-        filterView = UIView()
-        filterView.backgroundColor = UIColor.clearColor()
-        view.addSubview(filterView)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clap(_:)), name: ClapperClapNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(lightingUpdated(_:)), name: ClapperLightNotification, object: nil)

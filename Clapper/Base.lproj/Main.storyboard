@@ -19,9 +19,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLH-mQ-V1S">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLH-mQ-V1S">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5P0-k4-YMH" customClass="CameraButton" customModule="Clapper" customModuleProvider="target">
                                 <rect key="frame" x="268" y="504" width="64" height="64"/>
@@ -44,15 +44,24 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-OF-5A8">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Ch5-OF-5A8" secondAttribute="bottom" id="046-uF-yYy"/>
                             <constraint firstItem="LLH-mQ-V1S" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4TQ-oe-K6J"/>
                             <constraint firstItem="GVK-ly-52e" firstAttribute="centerY" secondItem="5P0-k4-YMH" secondAttribute="centerY" id="6Sr-kr-m32"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LLH-mQ-V1S" secondAttribute="bottom" id="BMz-Qj-hDx"/>
+                            <constraint firstItem="5P0-k4-YMH" firstAttribute="top" secondItem="Ch5-OF-5A8" secondAttribute="bottom" id="D9C-z6-FQf"/>
                             <constraint firstItem="GVK-ly-52e" firstAttribute="height" secondItem="5P0-k4-YMH" secondAttribute="height" multiplier="0.75" id="Jae-DY-v47"/>
                             <constraint firstItem="5P0-k4-YMH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MJh-ln-lun"/>
+                            <constraint firstItem="Ch5-OF-5A8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aQI-1V-uKw"/>
+                            <constraint firstAttribute="trailing" secondItem="Ch5-OF-5A8" secondAttribute="trailing" id="cq7-av-lJN"/>
                             <constraint firstItem="LLH-mQ-V1S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gXj-lG-ioB"/>
+                            <constraint firstItem="Ch5-OF-5A8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ghY-Vq-pIG"/>
                             <constraint firstItem="LLH-mQ-V1S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iYA-iK-ECE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5P0-k4-YMH" secondAttribute="bottom" constant="32" id="pHT-1n-H0r"/>
                             <constraint firstAttribute="trailing" secondItem="GVK-ly-52e" secondAttribute="trailing" constant="40" id="wQy-kf-AhL"/>
@@ -61,12 +70,14 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="gXj-lG-ioB"/>
+                                <exclude reference="D9C-z6-FQf"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="5P0-k4-YMH" id="q4s-el-WXd"/>
                         <outlet property="cameraView" destination="LLH-mQ-V1S" id="c7w-21-aQH"/>
+                        <outlet property="filterView" destination="Ch5-OF-5A8" id="Miw-Bc-T0A"/>
                         <outlet property="photosButton" destination="GVK-ly-52e" id="5Nl-gV-VXj"/>
                     </connections>
                 </viewController>

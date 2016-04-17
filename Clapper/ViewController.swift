@@ -7,13 +7,14 @@
 //
 
 import AVFoundation
+import Photos
 import UIKit
 
-class ViewController: UIViewController, CameraButtonDelegate {
+class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelegate {
     
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var cameraButton: CameraButton!
-    @IBOutlet weak var finishedView: UIImageView!
+    @IBOutlet weak var photosButton: PhotosButton!
     
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
@@ -21,14 +22,16 @@ class ViewController: UIViewController, CameraButtonDelegate {
     private var stillImageOutput: AVCaptureStillImageOutput!
     private var imageTaken: UIImage!
     
+    private var assets = [PHAsset]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initializeCamera()
+        initializePhotos()
         
         cameraButton.delegate = self
-        
-        finishedView.alpha = 0
+        photosButton.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clap(_:)), name: ClapperClapNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(lightingUpdated(_:)), name: ClapperLightNotification, object: nil)
@@ -82,6 +85,27 @@ class ViewController: UIViewController, CameraButtonDelegate {
         captureSession.startRunning()
     }
     
+    func initializePhotos() {
+        assets = [PHAsset]()
+        
+        let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: nil)
+        fetchResult.enumerateObjectsUsingBlock { (asset, idx, stop) in
+            guard let asset = asset as? PHAsset else {
+                return
+            }
+            
+            self.assets.append(asset)
+        }
+        
+        PHImageManager.defaultManager().requestImageForAsset(assets.last!, targetSize: CGSizeMake(96, 96), contentMode: .AspectFill, options: nil) { (image, info) in
+            guard let image = image else {
+                return
+            }
+            
+            self.photosButton.image = image
+        }
+    }
+    
     func takePicture() {
         var videoConnection: AVCaptureConnection?
         
@@ -97,12 +121,17 @@ class ViewController: UIViewController, CameraButtonDelegate {
         stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (imageSampleBuffer, error) -> Void in
             let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer)
             self.imageTaken = UIImage(data: data)
-            self.finishedView.image = self.imageTaken
             
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.finishedView.alpha = 1
-            })
+            self.photosButton.image = self.imageTaken
         })
+    }
+    
+    func openPhotosApp() {
+        let controller = UIImagePickerController()
+        controller.allowsEditing = false
+        controller.sourceType = .PhotoLibrary
+        
+        presentViewController(controller, animated: true, completion: nil)
     }
     
     func clap(notification: NSNotification) {

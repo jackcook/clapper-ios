@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -30,28 +31,35 @@
                                     <constraint firstAttribute="height" constant="64" id="jcz-Bm-Pzv"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5XH-lT-VM2">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVK-ly-52e" customClass="PhotosButton" customModule="Clapper" customModuleProvider="target">
+                                <rect key="frame" x="512" y="512" width="48" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="GVK-ly-52e" secondAttribute="height" multiplier="1:1" id="BO6-3K-9kt"/>
+                                    <constraint firstAttribute="height" constant="24" id="DZA-i6-j5r"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="DZA-i6-j5r"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LLH-mQ-V1S" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4TQ-oe-K6J"/>
+                            <constraint firstItem="GVK-ly-52e" firstAttribute="centerY" secondItem="5P0-k4-YMH" secondAttribute="centerY" id="6Sr-kr-m32"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LLH-mQ-V1S" secondAttribute="bottom" id="BMz-Qj-hDx"/>
-                            <constraint firstItem="5XH-lT-VM2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Jnp-4k-39n"/>
+                            <constraint firstItem="GVK-ly-52e" firstAttribute="height" secondItem="5P0-k4-YMH" secondAttribute="height" multiplier="0.75" id="Jae-DY-v47"/>
                             <constraint firstItem="5P0-k4-YMH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MJh-ln-lun"/>
-                            <constraint firstAttribute="trailing" secondItem="5XH-lT-VM2" secondAttribute="trailing" id="Qi1-61-0QI"/>
-                            <constraint firstItem="5XH-lT-VM2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aB5-mL-ng3"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5XH-lT-VM2" secondAttribute="bottom" id="dkZ-Zq-dBL"/>
                             <constraint firstItem="LLH-mQ-V1S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gXj-lG-ioB"/>
                             <constraint firstItem="LLH-mQ-V1S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iYA-iK-ECE"/>
-                            <constraint firstItem="5XH-lT-VM2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ikH-bx-VeP"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5P0-k4-YMH" secondAttribute="bottom" constant="32" id="pHT-1n-H0r"/>
+                            <constraint firstAttribute="trailing" secondItem="GVK-ly-52e" secondAttribute="trailing" constant="40" id="wQy-kf-AhL"/>
                             <constraint firstAttribute="trailing" secondItem="LLH-mQ-V1S" secondAttribute="trailing" id="x1b-BG-oed"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Jnp-4k-39n"/>
                                 <exclude reference="gXj-lG-ioB"/>
                             </mask>
                         </variation>
@@ -59,7 +67,7 @@
                     <connections>
                         <outlet property="cameraButton" destination="5P0-k4-YMH" id="q4s-el-WXd"/>
                         <outlet property="cameraView" destination="LLH-mQ-V1S" id="c7w-21-aQH"/>
-                        <outlet property="finishedView" destination="5XH-lT-VM2" id="EFb-r7-cOe"/>
+                        <outlet property="photosButton" destination="GVK-ly-52e" id="5Nl-gV-VXj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

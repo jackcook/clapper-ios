@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         
         finishedView.alpha = 0
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clap), name: ClapperClapNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clap(_:)), name: ClapperClapNotification, object: nil)
     }
     
     func initializeCamera() {
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
         captureSession.startRunning()
     }
     
-    func clap() {
+    func takePicture() {
         var videoConnection: AVCaptureConnection?
         
         connectionsLoop: for connection in stillImageOutput.connections {
@@ -99,5 +99,19 @@ class ViewController: UIViewController {
                 self.finishedView.alpha = 1
             })
         })
+    }
+    
+    func clap(notification: NSNotification) {
+        guard let n = notification.object as? Int else {
+            return
+        }
+        
+        print("\(n) claps")
+        
+        if n == 1 {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                self.takePicture()
+            }
+        }
     }
 }

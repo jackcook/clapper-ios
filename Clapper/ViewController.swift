@@ -18,7 +18,7 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
     
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
-    private var captureDevice: AVCaptureDevice!
+    private var camera: AVCaptureDevice!
     private var stillImageOutput: AVCaptureStillImageOutput!
     private var imageTaken: UIImage!
     
@@ -40,7 +40,7 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
     func initializeCamera() {
         captureSession = AVCaptureSession()
         
-        let camera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        camera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         let cameraInput = try! AVCaptureDeviceInput(device: camera)
         
         var bestFormat: AVCaptureDeviceFormat?
@@ -153,7 +153,17 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
             return
         }
         
-        print("\(n) light")
+        let bias = -1 * (Float(n) / 54 * (camera.maxExposureTargetBias - camera.minExposureTargetBias) / 2 - 4)
+        
+        do {
+            try camera.lockForConfiguration()
+            camera.setExposureTargetBias(bias) { (time) in
+                print("bias set")
+            }
+            camera.unlockForConfiguration()
+        } catch {
+            print("couldn't set light")
+        }
     }
     
     func takePhoto(button: CameraButton) {

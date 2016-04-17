@@ -122,6 +122,16 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
             let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer)
             self.imageTaken = UIImage(data: data)
             
+            PHPhotoLibrary.sharedPhotoLibrary().performChanges({ 
+                PHAssetChangeRequest.creationRequestForAssetFromImage(self.imageTaken)
+            }, completionHandler: { (success, error) in
+                if success {
+                    print("success")
+                } else {
+                    print("error: \(error)")
+                }
+            })
+            
             self.photosButton.image = self.imageTaken
         })
     }

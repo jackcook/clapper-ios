@@ -22,6 +22,8 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
     private var stillImageOutput: AVCaptureStillImageOutput!
     private var imageTaken: UIImage!
     
+    private var filterView: UIView!
+    
     private var assets = [PHAsset]()
     
     override func viewDidLoad() {
@@ -33,8 +35,18 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
         cameraButton.delegate = self
         photosButton.delegate = self
         
+        filterView = UIView()
+        filterView.backgroundColor = UIColor.clearColor()
+        view.addSubview(filterView)
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clap(_:)), name: ClapperClapNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(lightingUpdated(_:)), name: ClapperLightNotification, object: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        filterView.frame = view.bounds
     }
     
     func initializeCamera() {
@@ -163,7 +175,7 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
             return
         }
         
-        let bias = -1 * (Float(n) / 54 * (camera.maxExposureTargetBias - camera.minExposureTargetBias) / 2 - 4)
+        let bias = 4 - Float(n) * (camera.maxExposureTargetBias - camera.minExposureTargetBias) / 108
         
         do {
             try camera.lockForConfiguration()
@@ -173,6 +185,18 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
             camera.unlockForConfiguration()
         } catch {
             print("couldn't set light")
+        }
+    }
+    
+    func temperatureUpdated(notification: NSNotification) {
+        guard let n = notification.object as? Int else {
+            return
+        }
+        
+        if n < 50 {
+            filterView.backgroundColor = UIColor(red: 51/255, green: 152/255, blue: 219/255, alpha: CGFloat(min(0.2, 4 / Float(n))))
+        } else {
+            filterView.backgroundColor = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: CGFloat(min(0.2, 0.4 - (20 / Float(n)))))
         }
     }
     

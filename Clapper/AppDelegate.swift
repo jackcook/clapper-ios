@@ -11,6 +11,7 @@ import UIKit
 
 let ClapperClapNotification = "ClapperClapNotification"
 let ClapperLightNotification = "ClapperLightNotification"
+let ClapperTemperatureNotification = "ClapperTemperatureNotification"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,6 +42,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             NSNotificationCenter.defaultCenter().postNotificationName(ClapperLightNotification, object: ni)
+            
+            response.bodyString = "success"
+            callback(.Send(request, response))
+            
+            return
+        }
+        
+        server.get("/temperature") { (request, response, callback) in
+            guard let n = request.arguments["n"], ni = Int(n) else {
+                return
+            }
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(ClapperTemperatureNotification, object: ni)
             
             response.bodyString = "success"
             callback(.Send(request, response))

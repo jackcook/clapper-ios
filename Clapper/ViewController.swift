@@ -170,9 +170,7 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
         
         do {
             try camera.lockForConfiguration()
-            camera.setExposureTargetBias(bias) { (time) in
-                print("bias set")
-            }
+            camera.setExposureTargetBias(bias) { (time) in }
             camera.unlockForConfiguration()
         } catch {
             print("couldn't set light")
@@ -204,7 +202,7 @@ class ViewController: UIViewController, CameraButtonDelegate, PhotosButtonDelega
             } else if n >= 1 {
                 camera.torchMode = .On
             } else {
-                try camera.setTorchModeOnWithLevel(Float(n) / 350)
+                try camera.setTorchModeOnWithLevel(Float(n) / 300)
             }
             
             camera.unlockForConfiguration()

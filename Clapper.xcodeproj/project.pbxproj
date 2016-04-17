@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7792CC30692031A3385C482 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336F18DF656EA5E01D09C390 /* Pods.framework */; };
 		EBE327661CC31B5B00FD5EA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE327651CC31B5B00FD5EA9 /* AppDelegate.swift */; };
 		EBE327681CC31B5B00FD5EA9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE327671CC31B5B00FD5EA9 /* ViewController.swift */; };
 		EBE3276B1CC31B5B00FD5EA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBE327691CC31B5B00FD5EA9 /* Main.storyboard */; };
 		EBE3276D1CC31B5B00FD5EA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBE3276C1CC31B5B00FD5EA9 /* Assets.xcassets */; };
 		EBE327701CC31B5B00FD5EA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBE3276E1CC31B5B00FD5EA9 /* LaunchScreen.storyboard */; };
+		EBE327791CC320A200FD5EA9 /* ClapperConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE327781CC320A200FD5EA9 /* ClapperConnection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		336F18DF656EA5E01D09C390 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		68D9475119E5210B1B17BA60 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		B8CD312D42431AB480A5A345 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EBE327621CC31B5B00FD5EA9 /* Clapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE327651CC31B5B00FD5EA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBE327671CC31B5B00FD5EA9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +27,8 @@
 		EBE3276C1CC31B5B00FD5EA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBE3276F1CC31B5B00FD5EA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBE327711CC31B5B00FD5EA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBE327771CC31F9800FD5EA9 /* ObjectiveBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveBridge.h; sourceTree = "<group>"; };
+		EBE327781CC320A200FD5EA9 /* ClapperConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClapperConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +36,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7792CC30692031A3385C482 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		159B5513911CD7C4E0C8FF64 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				68D9475119E5210B1B17BA60 /* Pods.debug.xcconfig */,
+				B8CD312D42431AB480A5A345 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D49981C5800331DF6865973F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				336F18DF656EA5E01D09C390 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EBE327591CC31B5B00FD5EA9 = {
 			isa = PBXGroup;
 			children = (
 				EBE327641CC31B5B00FD5EA9 /* Clapper */,
 				EBE327631CC31B5B00FD5EA9 /* Products */,
+				159B5513911CD7C4E0C8FF64 /* Pods */,
+				D49981C5800331DF6865973F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +83,8 @@
 			children = (
 				EBE327651CC31B5B00FD5EA9 /* AppDelegate.swift */,
 				EBE327671CC31B5B00FD5EA9 /* ViewController.swift */,
+				EBE327781CC320A200FD5EA9 /* ClapperConnection.swift */,
+				EBE327771CC31F9800FD5EA9 /* ObjectiveBridge.h */,
 				EBE327691CC31B5B00FD5EA9 /* Main.storyboard */,
 				EBE3276C1CC31B5B00FD5EA9 /* Assets.xcassets */,
 				EBE3276E1CC31B5B00FD5EA9 /* LaunchScreen.storyboard */,
@@ -71,9 +100,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBE327741CC31B5B00FD5EA9 /* Build configuration list for PBXNativeTarget "Clapper" */;
 			buildPhases = (
+				45B36280D58DC503DF8A572B /* Check Pods Manifest.lock */,
 				EBE3275E1CC31B5B00FD5EA9 /* Sources */,
 				EBE3275F1CC31B5B00FD5EA9 /* Frameworks */,
 				EBE327601CC31B5B00FD5EA9 /* Resources */,
+				82BD6039679410AD300CE318 /* Embed Pods Frameworks */,
+				670E874B69BFE7080B3D386A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,11 +162,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		45B36280D58DC503DF8A572B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		670E874B69BFE7080B3D386A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82BD6039679410AD300CE318 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EBE3275E1CC31B5B00FD5EA9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE327791CC320A200FD5EA9 /* ClapperConnection.swift in Sources */,
 				EBE327681CC31B5B00FD5EA9 /* ViewController.swift in Sources */,
 				EBE327661CC31B5B00FD5EA9 /* AppDelegate.swift in Sources */,
 			);
@@ -247,23 +328,27 @@
 		};
 		EBE327751CC31B5B00FD5EA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68D9475119E5210B1B17BA60 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Clapper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nyc.jackcook.Clapper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Clapper/ObjectiveBridge.h;
 			};
 			name = Debug;
 		};
 		EBE327761CC31B5B00FD5EA9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8CD312D42431AB480A5A345 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Clapper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nyc.jackcook.Clapper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Clapper/ObjectiveBridge.h;
 			};
 			name = Release;
 		};
@@ -286,6 +371,7 @@
 				EBE327761CC31B5B00FD5EA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

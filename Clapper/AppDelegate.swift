@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jack Cook. All rights reserved.
 //
 
+import Taylor
 import UIKit
 
 let ClapperClapNotification = "ClapperClapNotification"
@@ -13,36 +14,29 @@ let ClapperClapNotification = "ClapperClapNotification"
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var server: HTTPServer!
+    var server: Server!
     var window: UIWindow?
     
-    private func startServer() {
-        do {
-            try server.start()
-            print("Started HTTP server on port \(server.listeningPort())")
-        } catch let error as NSError {
-            print("Error starting HTTP server: \(error)")
-        }
-    }
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        DDLog.addLogger(DDTTYLogger.sharedInstance())
+        server = Taylor.Server()
         
-        server = HTTPServer()
-        server.setType("_http._tcp.")
-        server.setPort(12345)
-        server.setConnectionClass(ClapperConnection)
+        server.get("/clap") { (request, response, callback) in
+            NSNotificationCenter.defaultCenter().postNotificationName(ClapperClapNotification, object: nil)
+            
+            response.bodyString = "success"
+            callback(.Send(request, response))
+            
+            return
+        }
         
-        startServer()
+        let port = 12345
+        do {
+            print("Starting server on port \(port)")
+            try server.serveHTTP(port: port, forever: true)
+        } catch {
+            print("Server start failed \(error)")
+        }
         
         return true
-    }
-    
-    func applicationWillEnterForeground(application: UIApplication) {
-        startServer()
-    }
-    
-    func applicationDidEnterBackground(application: UIApplication) {
-        server.stop()
     }
 }
